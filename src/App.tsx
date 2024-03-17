@@ -48,7 +48,6 @@ function App() {
           <MusicPlayer />
         </div>
       )}
-      <button onClick={(e) => searchSong(" ")}>click</button>
     </div>
   );
 }
