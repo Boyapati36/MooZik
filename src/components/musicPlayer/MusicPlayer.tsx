@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Song } from '../../model/searchModels';
-import { nextSong, playPause, prevSong } from '../../redux/playerSlice';
+import { nextSong, playPause, prevSong, setActiveStreamingUrl } from '../../redux/playerSlice';
 import { RootState } from '../../redux/store';
+import { useGetStreamingDataQuery } from '../../redux/youtubeMusicApi';
 import Controls from './Controls';
 import Player from './Player';
 import Seekbar from './Seekbar';
@@ -17,11 +18,16 @@ const MusicPlayer: React.FC = () => {
   const [volume, setVolume] = useState<number>(0.3);
   const [repeat, setRepeat] = useState<boolean>(false);
   const [shuffle, setShuffle] = useState<boolean>(false);
+  const {data, isFetching, error} = useGetStreamingDataQuery(currentSongs[currentIndex].id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex, dispatch, currentSongs.length]);
+
+  useEffect(() => {
+    if(data) dispatch(setActiveStreamingUrl(data));
+  }, [data])
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -34,6 +40,7 @@ const MusicPlayer: React.FC = () => {
   const handleNextSong = () => {
     dispatch(playPause(false));
 
+    let index: number;
     if (!shuffle) {
       dispatch(nextSong((currentIndex + 1) % currentSongs.length));
     } else {
@@ -42,13 +49,15 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handlePrevSong = () => {
+    let index: number;
     if (currentIndex === 0) {
-      dispatch(prevSong(currentSongs.length - 1));
+      index = currentSongs.length - 1;
     } else if (shuffle) {
-      dispatch(prevSong(Math.floor(Math.random() * currentSongs.length)));
+      index = Math.floor(Math.random() * currentSongs.length);
     } else {
-      dispatch(prevSong(currentIndex - 1));
+      index = currentIndex - 1;
     }
+    dispatch(prevSong(index));
   };
 
   return (

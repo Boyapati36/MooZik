@@ -1,5 +1,3 @@
-import { Song } from "./searchModels";
-
 export interface PlayerProps {
     activeStreamingUrl: string | undefined;
     isPlaying: boolean;
