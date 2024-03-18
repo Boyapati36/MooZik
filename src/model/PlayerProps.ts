@@ -1,16 +1,12 @@
+import { Song } from "./searchModels";
+
 export interface PlayerProps {
-    activeSong: {
-        hub: {
-        actions: {
-            uri: string;
-        }[];
-        };
-    };
+    activeStreamingUrl: string | undefined;
     isPlaying: boolean;
     volume: number;
     seekTime: number;
     onEnded: () => void;
-    onTimeUpdate: () => void;
-    onLoadedData: () => void;
+    onTimeUpdate: (event: { target: { currentTime: React.SetStateAction<number>; }; }) => void;
+    onLoadedData: (event: { target: { duration: React.SetStateAction<number>; }; }) => void;
     repeat: boolean;
 }

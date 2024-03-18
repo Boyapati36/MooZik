@@ -14,10 +14,10 @@ import MusicPlayer from './components/MusicPlayer';
 import TopPlay from './components/TopPlay';
 import TopCharts from './components/TopCharts';
 import Search from './components/Search';
-import { DatumContent } from './model/searchModels';
+import { Song } from './model/searchModels';
 
 function App() {
-  const[activeSong, setActiveSong] = useState<DatumContent | null>(null);
+  const[activeSong, setActiveSong] = useState<Song | null>(null);
 
   return (
     <div className="relative flex">
@@ -34,7 +34,7 @@ function App() {
               <Route path="/around-you" element={<AroundYou />} />
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
-              <Route path="/search/:searchTerm" element={<Search />} />
+              <Route path="/search/:q/:shelf" element={<Search />} />
             </Routes>
           </div>
           <div className="xl:sticky relative top-0 h-fit">

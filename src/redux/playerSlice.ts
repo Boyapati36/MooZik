@@ -8,8 +8,8 @@ interface PlayerState {
     currentIndex: number;
     isActive: boolean;
     isPlaying: boolean;
-    activeSong: Song | {};
-    activeStreamingUrl: string;
+    activeSong: Song | null;
+    activeStreamingUrl: string | undefined;
     genreListId: string;
 }
 
@@ -18,7 +18,7 @@ const initialState: PlayerState = {
     currentIndex: 0,
     isActive: false,
     isPlaying: false,
-    activeSong: {},
+    activeSong: null,
     activeStreamingUrl:'',
     genreListId: '',
 };
@@ -29,7 +29,7 @@ const playerSlice = createSlice({
     reducers: {
         setActiveSong: (state, action: PayloadAction<ActiveSong>) => {
             state.activeSong = action.payload.song;
-            state.activeStreamingUrl = action.payload.streaming.results;
+            state.activeStreamingUrl = action.payload.streaming?.results;
 
             if (action.payload.currentSongs) {
                 state.currentSongs = action.payload.currentSongs;

@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, SyntheticEvent } from 'react';
 import { PlayerProps } from '../../model/PlayerProps';
 
-const Player: React.FC<PlayerProps> = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
+const Player: React.FC<PlayerProps> = ({activeStreamingUrl, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
 
     const ref = useRef<HTMLAudioElement>(null);
 
@@ -28,14 +28,24 @@ const Player: React.FC<PlayerProps> = ({ activeSong, isPlaying, volume, seekTime
         }
     }, [seekTime]);
 
+    const handleTimeUpdate = (event: SyntheticEvent<HTMLAudioElement, Event>) => {
+        const target = event.target as HTMLAudioElement;
+        onTimeUpdate({ target: { currentTime: target.currentTime } });
+    };
+
+    const handleLoadedData = (event: SyntheticEvent<HTMLAudioElement, Event>) => {
+        const target = event.target as HTMLAudioElement;
+        onLoadedData({ target: { duration: target.duration } });
+    };
+
     return (
         <audio
-            src={activeSong?.hub?.actions[1]?.uri}
+            src={activeStreamingUrl}
             ref={ref}
             loop={repeat}
             onEnded={onEnded}
-            onTimeUpdate={onTimeUpdate}
-            onLoadedData={onLoadedData}
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedData={handleLoadedData}
         />
     );
 };

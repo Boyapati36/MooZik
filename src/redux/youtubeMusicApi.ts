@@ -14,6 +14,7 @@ export const youtubeMusicApi = createApi({
   reducerPath: 'youtubeMusicApi',
   baseQuery: fetchBaseQuery({
     baseUrl,
+    method: 'POST',
     prepareHeaders: (headers) => {
       headers.set('X-RapidAPI-Key', process.env.REACT_APP_YOUTUBE_API_KEY as string);
       headers.set('X-RapidAPI-Host', process.env.REACT_APP_YOUTUBE_API_HOST as string);
@@ -31,13 +32,13 @@ export const youtubeMusicApi = createApi({
     getSearch: builder.query<SearchResponse, SearchQueryParams>({
       query: (params: SearchQueryParams) => ({
         url: '/search',
-        params
+        body: params
       }),
     }),
     getInfo: builder.query<InfoResponse, String>({
       query: (params: String) => ({
         url: '/info',
-        params: { "id": params } as InfoQueryParams,
+        body: { "id": params } as InfoQueryParams,
       }),
     }),
     getStreamingData: builder.query<StreamingResponse, String>({

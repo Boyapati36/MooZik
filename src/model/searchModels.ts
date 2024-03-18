@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface SearchResponse {
     message: string;
     results: Results;
     success: boolean;
@@ -10,13 +10,13 @@ export interface RootObject {
    }
    
    export interface Datum {
-    contents:     DatumContent[];
+    contents:     Song[];
     continuation: string;
     title:        ToggledTextClass;
     type:         string;
    }
    
-   export interface DatumContent {
+   export interface Song {
     album:         Album;
     artists:       Artist[];
     duration:      Duration;
