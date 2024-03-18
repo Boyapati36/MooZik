@@ -26,7 +26,7 @@ export const youtubeMusicApi = createApi({
     getSearchSuggestions: builder.query<SearchSuggestionResponse, SearchSuggestionQueryParams>({
       query: (params: SearchSuggestionQueryParams) => ({
         url: '/search-suggestions',
-        params
+        body: params
       }),
     }),
     getSearch: builder.query<SearchResponse, SearchQueryParams>({
@@ -44,13 +44,13 @@ export const youtubeMusicApi = createApi({
     getStreamingData: builder.query<StreamingResponse, String>({
       query: (params: String) => ({
         url: '/streaming-data',
-        params: { "id": params } as InfoQueryParams,
+        body: { "id": params } as InfoQueryParams,
       }),
     }),
     getLyric: builder.query<LyricResponse, String>({
       query: (params: String) => ({
         url: '/lyric',
-        params: { "id": params } as InfoQueryParams,
+        body: { "id": params } as InfoQueryParams,
       }),
     }),
   }),

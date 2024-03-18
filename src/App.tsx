@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { searchSong } from './services/youtubeServices'
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Searchbar from './components/Searchbar';
-import Discover from './components/Discover';
-import TopArtists from './components/TopArtists';
+import './App.css';
 import AroundYou from './components/AroundYou';
 import ArtistDetails from './components/ArtistDetails';
+import Discover from './components/Discover';
+import MusicPlayer from './components/musicPlayer/MusicPlayer';
+import Search from './components/Search/Search';
+import Searchbar from './components/Search/Searchbar';
+import Sidebar from './components/Sidebar';
 import SongDetails from './components/SongDetails';
-import MusicPlayer from './components/MusicPlayer';
-import TopPlay from './components/TopPlay';
+import TopArtists from './components/TopArtists';
 import TopCharts from './components/TopCharts';
-import Search from './components/Search';
-import { Song } from './model/searchModels';
+import TopPlay from './components/TopPlay';
+import { RootState } from './redux/store';
 
 function App() {
-  const[activeSong, setActiveSong] = useState<Song | null>(null);
+  const{activeSong} = useSelector((state: RootState) => state.player);
 
   return (
     <div className="relative flex">

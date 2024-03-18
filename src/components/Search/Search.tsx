@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import SongCard from '../components/SongCard';
-import { Song } from '../model/searchModels'; // Assuming the model file path and types are correct
-import { SearchQueryParams } from '../model/searchQueryParam';
-import { RootState } from '../redux/store';
-import { useGetSearchQuery } from '../redux/youtubeMusicApi';
-import Error from './Error';
-import Loader from './Loader';
+import SongCard from '../SongCard';
+import { Song } from '../../model/searchModels'; // Assuming the model file path and types are correct
+import { SearchQueryParams } from '../../model/searchQueryParam';
+import { RootState } from '../../redux/store';
+import { useGetSearchQuery } from '../../redux/youtubeMusicApi';
+import Error from '../Error';
+import Loader from '../Loader';
 import { useParams } from 'react-router-dom';
 
 const Search: React.FC = () => {
