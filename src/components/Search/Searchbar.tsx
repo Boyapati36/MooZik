@@ -6,12 +6,11 @@ import { FiSearch } from 'react-icons/fi';
 const Searchbar: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const shelf = "song"
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate(`/search/${searchTerm}/${shelf}`);
+    navigate(`/search/${searchTerm}`);
   };
 
   return (

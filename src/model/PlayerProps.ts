@@ -1,5 +1,5 @@
 export interface PlayerProps {
-    activeStreamingUrl: string | undefined;
+    videoId: string | undefined;
     isPlaying: boolean;
     volume: number;
     seekTime: number;

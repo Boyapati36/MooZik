@@ -1,7 +1,7 @@
-import { Song } from "./searchModels";
+import { SongDetailed } from "ytmusic-api";
 
 export interface TrackProps {
     isPlaying: boolean;
     isActive: boolean;
-    activeSong: Song;
+    activeSong: SongDetailed;
 }

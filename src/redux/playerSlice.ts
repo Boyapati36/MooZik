@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Song } from '../model/searchModels';
+import { SearchResult, SongDetailed } from 'ytmusic-api';
 import { ActiveSong } from '../model/SongModel';
 import { StreamingResponse } from '../model/StreamingResponse';
 
 interface PlayerState {
-    currentSongs: Song[];
+    currentSongs: SongDetailed[];
     currentIndex: number;
     isActive: boolean;
     isPlaying: boolean;
-    activeSong: Song | null;
+    activeSong: SongDetailed | null;
     activeStreamingUrl: string | undefined;
     genreListId: string;
 }
@@ -19,7 +19,7 @@ const initialState: PlayerState = {
     isActive: false,
     isPlaying: false,
     activeSong: null,
-    activeStreamingUrl:'',
+    activeStreamingUrl: '',
     genreListId: '',
 };
 
@@ -29,7 +29,6 @@ const playerSlice = createSlice({
     reducers: {
         setActiveSong: (state, action: PayloadAction<ActiveSong>) => {
             state.activeSong = action.payload.song;
-            state.activeStreamingUrl = action.payload.streaming?.results;
 
             if (action.payload.currentSongs) {
                 state.currentSongs = action.payload.currentSongs;
@@ -38,7 +37,11 @@ const playerSlice = createSlice({
             state.currentIndex = action.payload.currentSongs.findIndex(song => song === action.payload.song);
             state.isActive = true;
         },
-        
+
+        setCurrentSongs: (state, action: PayloadAction<SongDetailed[]>) => {
+            state.currentSongs = action.payload;
+        },
+
         setActiveStreamingUrl: (state, action: PayloadAction<StreamingResponse>) => {
             state.activeStreamingUrl = action.payload.results;
         },
@@ -67,6 +70,6 @@ const playerSlice = createSlice({
     },
 });
 
-export const { setActiveSong, setActiveStreamingUrl, nextSong, prevSong, playPause } = playerSlice.actions;
+export const { setActiveSong, setCurrentSongs, setActiveStreamingUrl, nextSong, prevSong, playPause } = playerSlice.actions;
 
 export default playerSlice.reducer;

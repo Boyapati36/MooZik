@@ -3,31 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Song } from '../../model/searchModels';
 import { nextSong, playPause, prevSong, setActiveStreamingUrl } from '../../redux/playerSlice';
 import { RootState } from '../../redux/store';
-import { useGetStreamingDataQuery } from '../../redux/youtubeMusicApi';
+// import { useGetStreamingDataQuery } from '../../redux/youtubeMusicApi';
 import Controls from './Controls';
 import Player from './Player';
 import Seekbar from './Seekbar';
 import Track from './Track';
 import VolumeBar from './VolumeBar';
+import { SongDetailed } from 'ytmusic-api';
 
 const MusicPlayer: React.FC = () => {
-  const { activeSong, currentSongs, currentIndex, isPlaying, activeStreamingUrl } = useSelector((state: RootState) => state.player);
+  const { activeSong, currentSongs, currentIndex, isPlaying } = useSelector((state: RootState) => state.player);
   const [duration, setDuration] = useState<number>(0);
   const [seekTime, setSeekTime] = useState<number>(0);
   const [appTime, setAppTime] = useState<number>(0);
   const [volume, setVolume] = useState<number>(0.3);
   const [repeat, setRepeat] = useState<boolean>(false);
   const [shuffle, setShuffle] = useState<boolean>(false);
-  const {data, isFetching, error} = useGetStreamingDataQuery(currentSongs[currentIndex].id);
+  // const {data, isFetching, error} = useGetStreamingDataQuery(currentSongs[currentIndex].id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex, dispatch, currentSongs.length]);
 
-  useEffect(() => {
-    if(data) dispatch(setActiveStreamingUrl(data));
-  }, [data])
+  // useEffect(() => {
+  //   if(data) dispatch(setActiveStreamingUrl(data));
+  // }, [data])
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -38,7 +39,6 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleNextSong = () => {
-    dispatch(playPause(false));
 
     let index: number;
     if (!shuffle) {
@@ -62,7 +62,7 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <div className="relative sm:px-12 px-8 w-full flex items-center justify-between">
-      <Track isPlaying={isPlaying} isActive={true} activeSong={activeSong as Song} />
+      <Track isPlaying={isPlaying} isActive={true} activeSong={activeSong as SongDetailed} />
       <div className="flex-1 flex flex-col items-center justify-center">
         <Controls
           isPlaying={isPlaying}
@@ -84,7 +84,7 @@ const MusicPlayer: React.FC = () => {
           appTime={appTime}
         />
         <Player
-          activeStreamingUrl={activeStreamingUrl}
+          videoId={activeSong?.videoId}
           volume={volume}
           isPlaying={isPlaying}
           seekTime={seekTime}

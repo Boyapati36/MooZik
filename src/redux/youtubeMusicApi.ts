@@ -1,12 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SearchSuggestionResponse } from '../model/searchSuggestionsModel';
-import { SearchSuggestionQueryParams } from '../model/searchSuggestionQueryParams';
-import { SearchResponse } from '../model/searchModels';
-import { SearchQueryParams } from '../model/searchQueryParam';
-import { InfoResponse } from '../model/InfoResponse';
+import { SongDetailed } from 'ytmusic-api';
 import { InfoQueryParams } from '../model/InfoQueryParams';
-import { StreamingResponse } from '../model/StreamingResponse';
+import { InfoResponse } from '../model/InfoResponse';
 import { LyricResponse } from '../model/LyricRespnose';
+import { StreamingResponse } from '../model/StreamingResponse';
+import { SearchQueryParams, SearchSongParams } from '../model/searchQueryParam';
+import { SearchSuggestionQueryParams } from '../model/searchSuggestionQueryParams';
+import { SearchSuggestionResponse } from '../model/searchSuggestionsModel';
+import { HomePageContent } from 'ytmusic-api/dist/@types/types';
 
 const baseUrl: string = process.env.REACT_APP_YOUTUBE_API_ENDPOINT as string;
 
@@ -14,7 +15,6 @@ export const youtubeMusicApi = createApi({
   reducerPath: 'youtubeMusicApi',
   baseQuery: fetchBaseQuery({
     baseUrl,
-    method: 'POST',
     prepareHeaders: (headers) => {
       headers.set('X-RapidAPI-Key', process.env.REACT_APP_YOUTUBE_API_KEY as string);
       headers.set('X-RapidAPI-Host', process.env.REACT_APP_YOUTUBE_API_HOST as string);
@@ -23,16 +23,28 @@ export const youtubeMusicApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getSearchSuggestions: builder.query<SearchSuggestionResponse, SearchSuggestionQueryParams>({
-      query: (params: SearchSuggestionQueryParams) => ({
-        url: '/search-suggestions',
-        body: params
+    getHome: builder.query<HomePageContent[], undefined>({
+      query: () => ({
+        url: '/discover'
       }),
     }),
-    getSearch: builder.query<SearchResponse, SearchQueryParams>({
+    getSearchSuggestions: builder.query<SearchSuggestionResponse, SearchSuggestionQueryParams>({
+      query: (params: SearchSuggestionQueryParams) => ({
+        url: '/serachSuggestions',
+        params
+      }),
+    }),
+    getSearch: builder.query<SongDetailed[], SearchSongParams>({
       query: (params: SearchQueryParams) => ({
         url: '/search',
-        body: params
+        params
+      }),
+    }),
+    getSearchSong: builder.query<SongDetailed[], SearchSongParams>({
+      query: (params: SearchQueryParams) => ({
+        url: '/searchSong',
+        method: 'GET',
+        params
       }),
     }),
     getInfo: builder.query<InfoResponse, String>({
@@ -56,4 +68,4 @@ export const youtubeMusicApi = createApi({
   }),
 });
 
-export const { useGetSearchQuery, useGetSearchSuggestionsQuery, useGetInfoQuery, useGetLyricQuery, useGetStreamingDataQuery } = youtubeMusicApi;
+export const { useGetHomeQuery, useGetSearchQuery, useGetSearchSongQuery, useGetSearchSuggestionsQuery, useGetInfoQuery, useGetLyricQuery, useGetStreamingDataQuery } = youtubeMusicApi;

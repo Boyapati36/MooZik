@@ -1,8 +1,7 @@
+import { SongDetailed } from "ytmusic-api";
 import { StreamingResponse } from "./StreamingResponse";
-import { Song } from "./searchModels";
 
 export interface ActiveSong{
-    song: Song | null;
-    streaming: StreamingResponse | null;
-    currentSongs: Song[];
+    song: SongDetailed | null;
+    currentSongs: SongDetailed[];
 }

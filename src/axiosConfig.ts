@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const youtubeBaseUrl: string = process.env.REACT_APP_YOUTUBE_API_ENDPOINT as string;
 
-const instance = axios.create({
+const axiosInstance = axios.create({
   baseURL: youtubeBaseUrl,
   timeout: 10000,
   headers: {
@@ -12,4 +12,4 @@ const instance = axios.create({
   }
 });
 
-export default instance;
+export default axiosInstance;

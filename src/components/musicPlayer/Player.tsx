@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, SyntheticEvent } from 'react';
 import { PlayerProps } from '../../model/PlayerProps';
 
-const Player: React.FC<PlayerProps> = ({activeStreamingUrl, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
+const Player: React.FC<PlayerProps> = ({videoId, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
 
     const ref = useRef<HTMLAudioElement>(null);
 
@@ -40,9 +40,10 @@ const Player: React.FC<PlayerProps> = ({activeStreamingUrl, isPlaying, volume, s
 
     return (
         <audio
-            src={activeStreamingUrl}
+            src={`http://localhost:8080/watch?v=${videoId}`}
             ref={ref}
             loop={repeat}
+            autoPlay={isPlaying}
             onEnded={onEnded}
             onTimeUpdate={handleTimeUpdate}
             onLoadedData={handleLoadedData}
