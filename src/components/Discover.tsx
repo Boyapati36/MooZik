@@ -1,25 +1,27 @@
 import React from 'react';
 
-function TopArtists() {
-  const artists = [
-    { name: "Artist 1", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 2", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 3", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 4", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 5", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 6", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
-    { name: "Artist 7", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+function Discover() {
+  const genres = [
+    { name: "Pop", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Rock", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Hip Hop", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Electronic", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Jazz", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Classical", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    { name: "Country", image: "https://via.placeholder.com/150", description: "Lorem ipsum dolor sit amet" },
+    
+ 
   ];
 
   return (
     <main className="grid place-items-start m">
       <div className='m-10  max-w-[80vw]'>
-        <h1 className="text-3xl sm:text-2xl md:text-3xl font-bold text-gray-200 mb-5">Top Artists</h1>
+        <h1 className="text-3xl sm:text-2xl md:text-3xl font-bold text-gray-200 mb-5">Discover</h1>
         <section className="flex overflow-x-auto space-x-4">
-          {artists.map((artist, index) => (
+          {genres.map((genre, index) => (
             <div key={index} className="bg-gray-900 shadow-lg rounded p-3" style={{ minWidth: "150px" }}>
               <div className="group relative">
-                <img className="w-full md:w-72 block rounded" src={artist.image} alt="" />
+                <img className="w-full md:w-72 block rounded" src={genre.image} alt="" />
                 <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
                   <button className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
@@ -34,14 +36,14 @@ function TopArtists() {
                   </button>
 
                   <button className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-three-dots" viewBox="0 0 16 16">
+                      <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                     </svg>
                   </button>
                 </div>
               </div>
               <div className="p-5">
-                <h3 className="text-white text-lg">{artist.name}</h3>
+                <h3 className="text-white text-lg">{genre.name}</h3>
                 
               </div>
             </div>
@@ -52,6 +54,4 @@ function TopArtists() {
   );
 }
 
-export default TopArtists;
-
-
+export default Discover;
