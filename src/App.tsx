@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import AroundYou from './components/AroundYou';
 import ArtistDetails from './components/ArtistDetails';
-import Discover from './components/Discover';
+import Discover from './components/Home/Discover';
 import MusicPlayer from './components/musicPlayer/MusicPlayer';
 import Search from './components/Search/Search';
 import Searchbar from './components/Search/Searchbar';

@@ -40,7 +40,7 @@ const SongCard: React.FC<Props> = ({ song, isPlaying, activeSong, searchResults 
                         handlePlay={handlePlayClick}
                     />
                 </div>
-                <img alt="song_img" src={song.thumbnails[1].url} className="w-full h-full rounded-lg" />
+                <img alt="song_img" src={song.thumbnails[1]?.url ? song.thumbnails[1]?.url: song.thumbnails[0]?.url} className="w-full h-full rounded-lg" />
             </div>
 
             <div className="mt-4 flex flex-col">

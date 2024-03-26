@@ -40,7 +40,7 @@ const Player: React.FC<PlayerProps> = ({videoId, isPlaying, volume, seekTime, on
 
     return (
         <audio
-            src={`http://localhost:8080/watch?v=${videoId}`}
+            src={`http://localhost:8082/watch?v=${videoId}`}
             ref={ref}
             loop={repeat}
             autoPlay={isPlaying}

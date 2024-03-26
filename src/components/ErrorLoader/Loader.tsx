@@ -1,6 +1,6 @@
 import React from 'react';
 
-import loader from '../assets/loader.svg';
+import loader from '../../assets/loader.svg';
 
 interface LoaderProps {
     title?: string;

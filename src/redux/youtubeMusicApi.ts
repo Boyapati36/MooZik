@@ -7,7 +7,7 @@ import { StreamingResponse } from '../model/StreamingResponse';
 import { SearchQueryParams, SearchSongParams } from '../model/searchQueryParam';
 import { SearchSuggestionQueryParams } from '../model/searchSuggestionQueryParams';
 import { SearchSuggestionResponse } from '../model/searchSuggestionsModel';
-import { HomePageContent } from 'ytmusic-api/dist/@types/types';
+import { DiscoverContent } from '../model/DiscoverContent';
 
 const baseUrl: string = process.env.REACT_APP_YOUTUBE_API_ENDPOINT as string;
 
@@ -23,7 +23,7 @@ export const youtubeMusicApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getHome: builder.query<HomePageContent[], undefined>({
+    getHome: builder.query<DiscoverContent[], undefined>({
       query: () => ({
         url: '/discover'
       }),
