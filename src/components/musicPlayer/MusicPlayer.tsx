@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Song } from '../../model/searchModels';
-import { nextSong, playPause, prevSong, setActiveStreamingUrl } from '../../redux/playerSlice';
+import { nextSong, playPause, prevSong } from '../../redux/playerSlice';
 import { RootState } from '../../redux/store';
 // import { useGetStreamingDataQuery } from '../../redux/youtubeMusicApi';
+import { SongDetailed } from 'ytmusic-api';
 import Controls from './Controls';
 import Player from './Player';
 import Seekbar from './Seekbar';
 import Track from './Track';
 import VolumeBar from './VolumeBar';
-import { SongDetailed } from 'ytmusic-api';
 
 const MusicPlayer: React.FC = () => {
   const { activeSong, currentSongs, currentIndex, isPlaying } = useSelector((state: RootState) => state.player);
@@ -19,16 +18,11 @@ const MusicPlayer: React.FC = () => {
   const [volume, setVolume] = useState<number>(0.3);
   const [repeat, setRepeat] = useState<boolean>(false);
   const [shuffle, setShuffle] = useState<boolean>(false);
-  // const {data, isFetching, error} = useGetStreamingDataQuery(currentSongs[currentIndex].id);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentSongs.length) dispatch(playPause(true));
   }, [currentIndex, dispatch, currentSongs.length]);
-
-  // useEffect(() => {
-  //   if(data) dispatch(setActiveStreamingUrl(data));
-  // }, [data])
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -39,8 +33,6 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleNextSong = () => {
-
-    let index: number;
     if (!shuffle) {
       dispatch(nextSong((currentIndex + 1) % currentSongs.length));
     } else {

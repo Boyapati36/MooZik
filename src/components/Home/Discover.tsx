@@ -1,27 +1,20 @@
-import { FC, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { SongDetailed } from 'ytmusic-api';
+import { DiscoverContent } from '../../model/DiscoverContent';
 import { RootState } from '../../redux/store';
 import { useGetHomeQuery } from '../../redux/youtubeMusicApi';
 import Error from '../ErrorLoader/Error';
 import Loader from '../ErrorLoader/Loader';
-import { DiscoverContent } from '../../model/DiscoverContent';
 import SongCard from '../SongCard';
-import { SongDetailed } from 'ytmusic-api';
 
 const Discover: FC = () => {
-  const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state: RootState) => state.player);
   const { data, isFetching, error } = useGetHomeQuery(undefined);
-  const [activeTab, setActiveTab] = useState(data?.at(0)?.title);
 
   if (isFetching) return <Loader title="Loading songs..." />;
 
   if (error) return <Error />;
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>, newActiveTab: string) => {
-    e.preventDefault();
-    setActiveTab(newActiveTab);
-  };
 
   const generateRandomColor = () => {
     const letters = '0123456789ABCDEF';
