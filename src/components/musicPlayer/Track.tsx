@@ -13,6 +13,9 @@ const Track: React.FC<TrackProps> = ({ isPlaying, isActive, activeSong }) => (
             <p className="truncate text-gray-300">
                 {activeSong?.album?.name ? activeSong?.album?.name : 'No active Album'}
             </p>
+            <p className="truncate text-gray-300 text-sm">
+                {activeSong?.artist?.name ? activeSong?.artist?.name : 'No active Artist'}
+            </p>
         </div>
     </div>
 );

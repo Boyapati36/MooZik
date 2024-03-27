@@ -29,8 +29,8 @@ const SongCard: React.FC<Props> = ({ song, isPlaying, activeSong, searchResults 
     };
 
     return (
-        <div className="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
-            <div className="relative w-full h-56 group">
+        <div className="flex md:flex-col flex-row w-[240px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer">
+            <div className="relative md:w-full md:h-56 w-10 h-10 group">
                 <div className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${activeSong?.videoId === videoId ? 'flex bg-black bg-opacity-70' : 'hidden'}`}>
                     <PlayPause
                         isPlaying={isPlaying}
@@ -40,12 +40,12 @@ const SongCard: React.FC<Props> = ({ song, isPlaying, activeSong, searchResults 
                         handlePlay={handlePlayClick}
                     />
                 </div>
-                <img alt="song_img" src={song.thumbnails[1]?.url ? song.thumbnails[1]?.url: song.thumbnails[0]?.url} className="w-full h-full rounded-lg" />
+                <img alt="song_img" src={song.thumbnails[1]?.url ? song.thumbnails[1]?.url: song.thumbnails[0]?.url} className="md:w-full md:h-full rounded-lg w-10 h-10" />
             </div>
 
-            <div className="mt-4 flex flex-col">
-                <p className="font-semibold text-lg text-white truncate">
-                    <Link to={`/songs/${videoId}`}>
+            <div className="md:mt-4 md:ml-0 md:w-full mt-2 ml-2 w-32 flex flex-col overflow-hidden">
+                <p className="font-semibold object-scale-down md:text-lg text-white truncate text-sm">
+                    <Link to={`/song/${videoId}/${song.artist.artistId}`}>
                         {name}
                     </Link>
                 </p>

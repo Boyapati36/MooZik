@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SongDetailed } from 'ytmusic-api';
+import { SongDetailed, SongFull } from 'ytmusic-api';
 import { InfoQueryParams } from '../model/InfoQueryParams';
 import { InfoResponse } from '../model/InfoResponse';
 import { LyricResponse } from '../model/LyricRespnose';
@@ -62,10 +62,25 @@ export const youtubeMusicApi = createApi({
     getLyric: builder.query<LyricResponse, String>({
       query: (params: String) => ({
         url: '/lyric',
-        body: { "id": params } as InfoQueryParams,
+        method: 'GET',
+        params
+      }),
+    }),
+    getArtistSongs: builder.query<SongDetailed[], SearchSongParams>({
+      query: (params: SearchSongParams) => ({
+        url: '/getArtistSongs',
+        method: 'GET',
+        params
+      }),
+    }),
+    getSongDetails: builder.query<SongFull, SearchSongParams>({
+      query: (params: SearchSongParams) => ({
+        url: '/getSongDetails',
+        method: 'GET',
+        params
       }),
     }),
   }),
 });
 
-export const { useGetHomeQuery, useGetSearchQuery, useGetSearchSongQuery, useGetSearchSuggestionsQuery, useGetInfoQuery, useGetLyricQuery, useGetStreamingDataQuery } = youtubeMusicApi;
+export const { useGetHomeQuery, useGetSearchQuery, useGetSearchSongQuery, useGetSearchSuggestionsQuery, useGetInfoQuery, useGetLyricQuery, useGetStreamingDataQuery, useGetArtistSongsQuery, useGetSongDetailsQuery } = youtubeMusicApi;
