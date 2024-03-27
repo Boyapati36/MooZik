@@ -6,12 +6,15 @@ const Track: React.FC<TrackProps> = ({ isPlaying, isActive, activeSong }) => (
         <div className={`${isPlaying && isActive ? 'animate-[spin_3s_linear_infinite]' : ''} hidden sm:block h-16 w-16 mr-4`}>
             <img src={activeSong.thumbnails[0].url} alt="cover art" className="rounded-full" />
         </div>
-        <div className="w-[50%]">
+        <div className="w-[100px] md:w-[50%]">
             <p className="truncate text-white font-bold text-lg">
                 {activeSong?.name ? activeSong.name : 'No active Song'}
             </p>
-            <p className="truncate text-gray-300">
+            <p className="text-gray-300 truncate">
                 {activeSong?.album?.name ? activeSong?.album?.name : 'No active Album'}
+            </p>
+            <p className="text-gray-300 text-sm truncate">
+                {activeSong?.artist?.name ? activeSong?.artist?.name : 'No active Artist'}
             </p>
         </div>
     </div>

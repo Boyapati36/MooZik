@@ -1,52 +1,67 @@
-import React from 'react';
+import React, { useState } from "react";
+import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { MdHistory, MdHome, MdPlaylistPlay } from "react-icons/md";
+import { RiSettings4Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Home = () => {
+  const menus = [
+    { name: "Home", link: "/", icon: MdHome },
+    { name: "History", link: "/", icon: MdHistory },
+    { name: "Playlists", link: "/", icon: MdPlaylistPlay },
+    { name: "Liked", link: "/", icon: AiOutlineHeart },
+    { name: "User", link: "/", icon: AiOutlineUser, margin: true },
+    { name: "Setting", link: "/", icon: RiSettings4Line }
+  ];
+  const [open, setOpen] = useState(false);
   return (
-    <aside className="fixed top-0 left-0 z-50 w-64 h-screen bg-gray-900 text-white shadow-lg">
-      
-      
-      <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-4xl lg:text-5xl"><span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">MooZik</span></h1>
-      
-
-      
-      <nav className="flex-1">
-        <ul className="py-4 space-y-2">
-          <li>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-300 rounded-lg hover:bg-gray-700"
+    <section className="flex gap-6 pr-16">
+      <div className={`bg-[#0e0e0e] min-h-screen ${open ? "w-60" : "w-16"} duration-500 absolute text-gray-100 px-4 z-50`}>
+        <div className="py-3 flex justify-end">
+          {!open && <HiMenuAlt3
+            size={26}
+            className="cursor-pointer"
+            onClick={() => setOpen(!open)}
+          />}
+          {open && (
+            <HiX
+              size={26}
+              className="cursor-pointer"
+              onClick={() => setOpen(false)}
+            />
+          )}
+        </div>
+        <div className="mt-4 flex flex-col gap-4 relative">
+          {menus?.map((menu, i) => (
+            <Link
+              to={menu?.link}
+              key={i}
+              className={` ${menu?.margin && "mt-5"
+                } group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
             >
-              <span>Account</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-300 rounded-lg hover:bg-gray-700"
-            >
-              <span>Genres</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-300 rounded-lg hover:bg-gray-700"
-            >
-              <span>Settings</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center px-4 py-2 text-gray-300 rounded-lg hover:bg-gray-700"
-            >
-              <span>About</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+              <div>{React.createElement(menu?.icon, { size: "20" })}</div>
+              <h2
+                style={{
+                  transitionDelay: `${i + 3}00ms`,
+                }}
+                className={`whitespace-pre duration-500 ${!open && "opacity-0 translate-x-28 overflow-hidden"
+                  }`}
+              >
+                {menu?.name}
+              </h2>
+              <h2
+                className={`${open && "hidden"
+                  } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit `}
+              >
+                {menu?.name}
+              </h2>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Sidebar;
+export default Home;

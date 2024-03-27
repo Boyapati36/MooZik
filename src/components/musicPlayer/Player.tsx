@@ -5,6 +5,7 @@ const Player: React.FC<PlayerProps> = ({videoId, isPlaying, volume, seekTime, on
 
     const ref = useRef<HTMLAudioElement>(null);
 
+    const ytDlService = process.env.REACT_APP_YOUTUBE_DL_ENDPOINT;
 
     useEffect(() => {
         if (ref.current) {
@@ -40,7 +41,7 @@ const Player: React.FC<PlayerProps> = ({videoId, isPlaying, volume, seekTime, on
 
     return (
         <audio
-            src={`http://localhost:8082/watch?v=${videoId}`}
+            src={`${ytDlService}/watch?v=${videoId}`}
             ref={ref}
             loop={repeat}
             autoPlay={isPlaying}

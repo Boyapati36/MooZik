@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SearchResult, SongDetailed } from 'ytmusic-api';
+import { SongDetailed } from 'ytmusic-api';
 import { ActiveSong } from '../model/SongModel';
 import { StreamingResponse } from '../model/StreamingResponse';
 
